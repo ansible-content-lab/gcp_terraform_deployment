@@ -7,8 +7,30 @@ variable "deployment_id" {
   }
 }
 
+variable "infrastructure_vpc_subnets" {
+  type = list(object({
+    name = string
+    cidr_block = string
+  }))
+  default = [{
+    name = "controller"
+    cidr_block = "172.16.0.0/24"
+  },
+   {
+    name = "execution"
+    cidr_block = "172.16.1.0/24"
+  },
+  {
+    name = "hub"
+    cidr_block = "172.16.2.0/24"
+  },
+  {
+    name = "eda"
+    cidr_block = "172.16.3.0/24"
+  }]
+}
+
 variable "region" {
   description = "GCP region"
   type = string
-  default = "us-east1"
 }
