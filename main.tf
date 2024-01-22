@@ -24,7 +24,7 @@ terraform {
 
 provider "google" {
   project = "agcp-001-dev"
-  region = "us-east1"
+  region = var.region
 }
 
 # Create deployment_id
@@ -34,4 +34,15 @@ resource "random_string" "deployment_id" {
   special = false
   upper = false
   numeric = false
+}
+
+#
+# Network
+#
+module "vnet" {
+  depends_on = [ random_string.deployment_id ]
+  
+  source = "./modules/vpc"
+  deployment_id = var.deployment_id == "" ? random_string.deployment_id[0].id : var.deployment_id
+  region = var.region
 }
