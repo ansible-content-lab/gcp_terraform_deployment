@@ -55,4 +55,5 @@ module "controller" {
   app_tag = "controller"
   deployment_id = var.deployment_id
   machine_type = var.machine_type
+  zone = var.zone
 }
