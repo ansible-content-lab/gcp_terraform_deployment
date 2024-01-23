@@ -12,6 +12,8 @@ This template performs the following actions in the order listed.
 | Create a virtual network | Creates a virtual network with subnets with a CIDR block.|
 | Create subnets | Creates the subnets for automation controller, execution environments, private automation hub, and Event-Driven Ansible. |
 | Create a firewall rules | Creates a firewall roules group that allows AAP ports within the VPC and HTTPS and automation mesh ports externally. |
+| Create a database server | Creates a PostgreSQL database instance and the necessary databases inside of it for the controller, hub, and Event-Driven Ansible components. |
+| Create a vpc peering | Creates a vpc peering between vpc network and a google's vpc network where SQL instance resides. |
 
 ## Getting Started
 
@@ -35,6 +37,13 @@ This section will walk through deploying the GCP infrastructure and Ansible Auto
 - [ ] Configure the GCP environment variable for authentication
 
 ### Deploying infrastructure
+
+The variables below are required for running this template
+
+| Variable | Description |
+| -------- | ----------- |
+| `infrastructure_db_username` | Username that will be the admin of the new database server. |
+| `infrastructure_db_password` | Password of the admin of the new database server. |
 
 Assuming that all variables are configured properly and your GCP account has permission to deploy the resources defined in this template.
 
@@ -69,7 +78,9 @@ This will permanently remove all data and infrastructure from the Google cloud, 
 ```bash
 terraform destroy
 ```
-Confirm to destroy infrastructure or pass in the `-auto-approve` parameter.
+Confirm to destroy infrastructure or pass in the `-auto-approve` parameter. 
+
+*Note*: If terraform destroy gets stuck on deleting the network connection, you can manually delete the network connection in the GCP console then run `terraform destroy` again
 
 ## Linting Terraform
 
