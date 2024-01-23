@@ -25,6 +25,7 @@ terraform {
 provider "google" {
   project = "agcp-001-dev"
   region = var.region
+  zone = var.zone
 }
 
 # Create deployment_id
@@ -45,4 +46,13 @@ module "vnet" {
   source = "./modules/vpc"
   deployment_id = var.deployment_id == "" ? random_string.deployment_id[0].id : var.deployment_id
   region = var.region
+}
+
+module "controller" {
+  depends_on = [ module.vnet ]
+  source = "./modules/vm"
+
+  app_tag = "controller"
+  deployment_id = var.deployment_id
+  machine_type = var.machine_type
 }
