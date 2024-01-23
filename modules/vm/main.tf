@@ -36,5 +36,9 @@ resource "google_compute_instance" "default" {
     subnetwork = "subnet-${var.deployment_id}-${var.app_tag}"
   }
 
-  tags = ["mytag","vm-${var.deployment_id}-${var.app_tag}-${random_string.infrastructure_vm_deployment_id.id}",var.app_tag ]
+  labels = {
+      "purpose" = "automation"
+      "environment" = "ansible-automation-platform"
+      "deployment" = "aap-infrastructure-${var.deployment_id}"
+    }
 }
