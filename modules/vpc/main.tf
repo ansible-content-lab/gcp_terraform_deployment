@@ -9,7 +9,7 @@ terraform {
 }
 
 resource "google_compute_network" "aap_infrastructure_vpc" {
-  name = "vpc-${var.deployment_id}-aap"
+  name = "aap-infrastructure-${var.deployment_id}-vpc"
   auto_create_subnetworks = false
   mtu = 1460
 }
@@ -30,8 +30,8 @@ resource "google_compute_firewall" "aap_infrastructure_firewall_rules" {
   description = "Creates firewall rule targeting tagged instances"
   target_tags = [ "aap-infrastructure-${var.deployment_id}" ]
   allow {
-    protocol  = "tcp"
-    ports     = ["22","80", "443", "5432","8443","27199"]
+    protocol = "tcp"
+    ports = ["22","80", "443", "5432","8443","27199"]
   }
   source_ranges = [ "0.0.0.0/0"]
 

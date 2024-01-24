@@ -48,6 +48,16 @@ module "vnet" {
   region = var.region
 }
 
+module "database" {
+  depends_on = [ random_string.deployment_id , module.vnet ]
+  
+  source = "./modules/database"
+  deployment_id = var.deployment_id == "" ? random_string.deployment_id[0].id : var.deployment_id
+  region = var.region
+  infrastructure_db_password = var.infrastructure_db_password
+  vpc_network_id = module.vnet.network_id
+}
+
 module "controller" {
   depends_on = [ module.vnet ]
   source = "./modules/vm"

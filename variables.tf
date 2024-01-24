@@ -8,7 +8,7 @@ variable "deployment_id" {
 }
 
 variable "region" {
-  description = "GCP region"
+  description = "GCP region."
   type = string
   default = "us-east1"
 }
@@ -23,4 +23,16 @@ variable "machine_type" {
   description = "Machine type to use for VM creation."
   type = string
   default = "n2-standard-2"
+}
+
+variable "infrastructure_db_username" {
+  description = "PostgreSQL username."
+  type = string
+  default = "postgres"
+}
+
+variable "infrastructure_db_password" {
+  description = "Initial PostgreSQL root password during creation."
+  type = string
+  sensitive = true
 }
