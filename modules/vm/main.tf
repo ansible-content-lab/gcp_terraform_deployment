@@ -31,7 +31,11 @@ resource "google_compute_instance" "aap_infrastructure_vm" {
   }
   network_interface {
     network = var.vpc_network_id
+<<<<<<< HEAD
     subnetwork = var.vpc_subnetwork_name
+=======
+    subnetwork = "subnet-${var.deployment_id}-${var.app_tag}"
+>>>>>>> 05c6e55 (add labelss to db instances)
   }
   labels = var.persistent_tags
 }
