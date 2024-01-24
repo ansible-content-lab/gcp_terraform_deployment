@@ -23,3 +23,13 @@ variable "zone" {
   type = string
   default = "us-east1-b"
 }
+
+variable "vpc_network_id" {
+  type = string
+  description = "VPC network name"
+}
+
+variable persistent_tags {
+  description = "Persistent tags"
+  type = map(string)
+}

@@ -56,6 +56,7 @@ module "database" {
   region = var.region
   infrastructure_db_password = var.infrastructure_db_password
   vpc_network_id = module.vnet.network_id
+  persistent_tags = local.persistent_tags
 }
 
 module "controller" {
@@ -66,4 +67,6 @@ module "controller" {
   deployment_id = var.deployment_id
   machine_type = var.machine_type
   zone = var.zone
+  vpc_network_id = module.vnet.network_id
+  persistent_tags = local.persistent_tags
 }

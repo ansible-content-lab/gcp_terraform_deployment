@@ -15,7 +15,7 @@ variable "region" {
 variable "database_version" {
   description = "Postgres database version"
   type = string
-  default = "15"
+  default = "13"
 }
 
 variable "deletion_protection_enabled" {
@@ -93,4 +93,9 @@ variable "ipv4_enabled" {
   description = "Whether the databse instance is assigned a public IP address or not."
   default = false
   type = bool
+}
+
+variable persistent_tags {
+  description = "Persistent tags"
+  type = map(string)
 }

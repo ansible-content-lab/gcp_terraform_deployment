@@ -48,6 +48,7 @@ resource "google_sql_database_instance" "aap_infrastructure_db_instance" {
       ipv4_enabled = var.ipv4_enabled
       private_network = var.vpc_network_id
     }
+    user_labels = var.persistent_tags
   }
 }
 
