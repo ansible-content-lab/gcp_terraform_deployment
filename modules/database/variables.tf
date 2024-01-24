@@ -51,7 +51,7 @@ variable "availability_type" {
 variable "disk_size" {
   description = "The disk size, in GB, for the master instance."
   type = number
-  default = 10
+  default = 20
 }
 
 variable "disk_type" {
