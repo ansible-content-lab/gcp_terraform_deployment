@@ -29,6 +29,11 @@ variable "vpc_network_id" {
   description = "VPC network name"
 }
 
+variable "vpc_subnetwork_name" {
+  type = string
+  description = "VPC subnetwork name"
+}
+
 variable persistent_tags {
   description = "Persistent tags"
   type = map(string)

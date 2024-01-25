@@ -31,7 +31,7 @@ resource "google_compute_instance" "aap_infrastructure_vm" {
   }
   network_interface {
     network = var.vpc_network_id
-    subnetwork = "subnet-${var.deployment_id}-${var.app_tag}"
+    subnetwork = var.vpc_subnetwork_name
   }
   labels = var.persistent_tags
 }
