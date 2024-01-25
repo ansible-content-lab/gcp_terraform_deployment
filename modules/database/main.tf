@@ -9,7 +9,7 @@ terraform {
 }
 
 resource "google_compute_global_address" "private_ip_address" {
-  name = "private-ip-address"
+  name = "private-ip-address-${var.deployment_id}"
   purpose = "VPC_PEERING"
   address = "172.16.4.0"
   address_type = "INTERNAL"
