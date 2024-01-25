@@ -36,3 +36,27 @@ variable "infrastructure_db_password" {
   type = string
   sensitive = true
 }
+
+variable "infrastructure_controller_count" {
+  description = "The number of instances for controller"
+  type = number
+  default = 1
+}
+
+variable "infrastructure_eda_count" {
+  description = "The number of EDA instances"
+  type = number
+  default = 0
+}
+
+variable "infrastructure_execution_count" {
+  description = "The number of execution instances"
+  type = number
+  default = 0
+}
+
+variable "infrastructure_hub_count" {
+  description = "The number of instances for hub"
+  type = number
+  default = 1
+}
