@@ -71,6 +71,9 @@ module "controller" {
   vpc_network_id = module.vnet.network_id
   vpc_subnetwork_name = "subnet-${var.deployment_id}-controller"
   persistent_tags = local.persistent_tags
+  infrastructure_admin_ssh_public_key_filepath = var.infrastructure_admin_ssh_public_key_filepath
+  infrastructure_admin_ssh_private_key_filepath = var.infrastructure_admin_ssh_private_key_filepath
+  infrastructure_admin_username = var.infrastructure_admin_username
 }
 
 module "hub" {
@@ -85,6 +88,9 @@ module "hub" {
   vpc_network_id = module.vnet.network_id
   vpc_subnetwork_name = "subnet-${var.deployment_id}-hub"
   persistent_tags = local.persistent_tags
+  infrastructure_admin_ssh_public_key_filepath = var.infrastructure_admin_ssh_public_key_filepath
+  infrastructure_admin_ssh_private_key_filepath = var.infrastructure_admin_ssh_private_key_filepath
+  infrastructure_admin_username = var.infrastructure_admin_username
 }
 
 module "execution" {
@@ -99,6 +105,9 @@ module "execution" {
   vpc_network_id = module.vnet.network_id
   vpc_subnetwork_name = "subnet-${var.deployment_id}-execution"
   persistent_tags = local.persistent_tags
+  infrastructure_admin_ssh_public_key_filepath = var.infrastructure_admin_ssh_public_key_filepath
+  infrastructure_admin_ssh_private_key_filepath = var.infrastructure_admin_ssh_private_key_filepath
+  infrastructure_admin_username = var.infrastructure_admin_username
 }
 
 module "eda" {
@@ -113,4 +122,7 @@ module "eda" {
   vpc_network_id = module.vnet.network_id
   vpc_subnetwork_name = "subnet-${var.deployment_id}-eda"
   persistent_tags = local.persistent_tags
+  infrastructure_admin_ssh_public_key_filepath = var.infrastructure_admin_ssh_public_key_filepath
+  infrastructure_admin_ssh_private_key_filepath = var.infrastructure_admin_ssh_private_key_filepath
+  infrastructure_admin_username = var.infrastructure_admin_username
 }

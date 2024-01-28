@@ -60,3 +60,27 @@ variable "infrastructure_hub_count" {
   type = number
   default = 1
 }
+variable "user" {
+  description = "Username"
+  type    = string
+  default = "admin"
+}
+
+variable "infrastructure_admin_ssh_public_key_filepath" {
+  description = "Public ssh key file path."
+  type = string
+  default = "~/.ssh/id_rsa.pub"
+}
+
+variable "infrastructure_admin_ssh_private_key_filepath" {
+  description = "Private ssh key file path."
+  type = string
+  default = "~/.ssh/id_rsa"
+}
+
+variable "infrastructure_admin_username" {
+  type = string
+  default = "awx"
+  description = "The admin username of the VM that will be deployed."
+  nullable = false
+}
