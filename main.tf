@@ -74,6 +74,8 @@ module "controller" {
   infrastructure_admin_ssh_public_key_filepath = var.infrastructure_admin_ssh_public_key_filepath
   infrastructure_admin_ssh_private_key_filepath = var.infrastructure_admin_ssh_private_key_filepath
   infrastructure_admin_username = var.infrastructure_admin_username
+  aap_red_hat_username = var.aap_red_hat_username
+  aap_red_hat_password = var.aap_red_hat_password
 }
 
 module "hub" {
@@ -91,6 +93,8 @@ module "hub" {
   infrastructure_admin_ssh_public_key_filepath = var.infrastructure_admin_ssh_public_key_filepath
   infrastructure_admin_ssh_private_key_filepath = var.infrastructure_admin_ssh_private_key_filepath
   infrastructure_admin_username = var.infrastructure_admin_username
+  aap_red_hat_username = var.aap_red_hat_username
+  aap_red_hat_password = var.aap_red_hat_password
 }
 
 module "execution" {
@@ -108,6 +112,8 @@ module "execution" {
   infrastructure_admin_ssh_public_key_filepath = var.infrastructure_admin_ssh_public_key_filepath
   infrastructure_admin_ssh_private_key_filepath = var.infrastructure_admin_ssh_private_key_filepath
   infrastructure_admin_username = var.infrastructure_admin_username
+  aap_red_hat_username = var.aap_red_hat_username
+  aap_red_hat_password = var.aap_red_hat_password
 }
 
 module "eda" {

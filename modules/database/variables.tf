@@ -90,7 +90,7 @@ variable "sql_db_address" {
 }
 
 variable "ipv4_enabled" {
-  description = "Whether the databse instance is assigned a public IP address or not."
+  description = "Whether the database instance is assigned a public IP address or not."
   default = false
   type = bool
 }

@@ -130,3 +130,14 @@ variable "infrastructure_admin_username" {
   description = "The admin username of the VM that will be deployed."
   nullable = false
 }
+
+variable "aap_red_hat_username" {
+  description = "Red Hat account name that will be used for Subscription Management."
+  type = string
+}
+
+variable "aap_red_hat_password" {
+  description = "Red Hat account password."
+  type = string
+  sensitive = true
+}
