@@ -11,7 +11,7 @@ terraform {
 resource "google_compute_global_address" "private_ip_address" {
   name = "private-ip-address-${var.deployment_id}"
   purpose = "VPC_PEERING"
-  address = "172.16.4.0"
+  address = var.sql_db_address
   address_type = "INTERNAL"
   prefix_length = 24
   network = var.vpc_network_id

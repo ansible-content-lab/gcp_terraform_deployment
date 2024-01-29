@@ -24,6 +24,7 @@ resource "google_compute_instance" "aap_infrastructure_vm" {
   name = "vm-${var.deployment_id}-${var.app_tag}-${random_string.infrastructure_vm_deployment_id.id}"
   machine_type = var.machine_type
   zone = var.zone
+  tags = [ "aap-infrastructure-${var.deployment_id}" ]
   boot_disk {
     initialize_params {
       image = "aap-installer-1704995744-x86-64"
@@ -32,6 +33,33 @@ resource "google_compute_instance" "aap_infrastructure_vm" {
   network_interface {
     network = var.vpc_network_id
     subnetwork = var.vpc_subnetwork_name
+    access_config {
+    }
   }
+  metadata = {
+    ssh-keys = "${var.infrastructure_admin_username}:${file(var.infrastructure_admin_ssh_public_key_filepath)}"
+  }
+  
   labels = var.persistent_tags
+}
+
+resource "terraform_data" "aap_infrastructure_sshkey" {
+  depends_on = [  google_compute_instance.aap_infrastructure_vm ]
+
+  count = var.app_tag == "controller" ? 1: 0
+  connection {
+      type = "ssh"
+      user = var.infrastructure_admin_username
+      host = google_compute_instance.aap_infrastructure_vm.network_interface[0].access_config[0].nat_ip
+      private_key = "${file(var.infrastructure_admin_ssh_private_key_filepath)}"
+  }
+  provisioner "file" {
+    source = var.infrastructure_admin_ssh_private_key_filepath
+    destination = "/home/${var.infrastructure_admin_username}/.ssh/infrastructure_ssh_private_key.pem"
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "chmod 0600 /home/${var.infrastructure_admin_username}/.ssh/infrastructure_ssh_private_key.pem",
+    ]
+  }
 }

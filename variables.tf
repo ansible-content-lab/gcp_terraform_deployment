@@ -40,13 +40,24 @@ variable "infrastructure_db_password" {
 variable "infrastructure_controller_count" {
   description = "The number of instances for controller"
   type = number
-  default = 1
+  default = 2
+}
+
+variable "infrastructure_controller_machine_type" {
+  description = "The number of instances for controller"
+  type = string
+  default = "n2-standard-2"
 }
 
 variable "infrastructure_eda_count" {
   description = "The number of EDA instances"
   type = number
   default = 0
+}
+variable "infrastructure_eda_machine_type" {
+  description = "The number of instances for controller"
+  type = string
+  default = "n2-standard-2"
 }
 
 variable "infrastructure_execution_count" {
@@ -55,8 +66,45 @@ variable "infrastructure_execution_count" {
   default = 0
 }
 
+variable "infrastructure_execution_machine_type" {
+  description = "The number of instances for controller"
+  type = string
+  default = "n2-standard-2"
+}
+
 variable "infrastructure_hub_count" {
   description = "The number of instances for hub"
   type = number
   default = 1
+}
+
+variable "infrastructure_hub_machine_type" {
+  description = "The number of instances for controller"
+  type = string
+    default = "n2-standard-2"
+}
+
+variable "user" {
+  description = "Username"
+  type    = string
+  default = "admin"
+}
+
+variable "infrastructure_admin_ssh_public_key_filepath" {
+  description = "Public ssh key file path."
+  type = string
+  default = "~/.ssh/id_rsa.pub"
+}
+
+variable "infrastructure_admin_ssh_private_key_filepath" {
+  description = "Private ssh key file path."
+  type = string
+  default = "~/.ssh/id_rsa"
+}
+
+variable "infrastructure_admin_username" {
+  type = string
+  default = "awx"
+  description = "The admin username of the VM that will be deployed."
+  nullable = false
 }

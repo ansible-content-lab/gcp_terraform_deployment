@@ -64,13 +64,16 @@ module "controller" {
   source = "./modules/vm"
 
   count = var.infrastructure_controller_count
-  app_tag = "controller-${count.index + 1}-"
+  app_tag = "controller"
   deployment_id = var.deployment_id
-  machine_type = var.machine_type
+  machine_type = var.infrastructure_controller_machine_type
   zone = var.zone
   vpc_network_id = module.vnet.network_id
   vpc_subnetwork_name = "subnet-${var.deployment_id}-controller"
   persistent_tags = local.persistent_tags
+  infrastructure_admin_ssh_public_key_filepath = var.infrastructure_admin_ssh_public_key_filepath
+  infrastructure_admin_ssh_private_key_filepath = var.infrastructure_admin_ssh_private_key_filepath
+  infrastructure_admin_username = var.infrastructure_admin_username
 }
 
 module "hub" {
@@ -78,13 +81,16 @@ module "hub" {
   source = "./modules/vm"
 
   count = var.infrastructure_hub_count
-  app_tag = "hub-${count.index + 1}-"
+  app_tag = "hub"
   deployment_id = var.deployment_id
-  machine_type = var.machine_type
+  machine_type = var.infrastructure_hub_machine_type
   zone = var.zone
   vpc_network_id = module.vnet.network_id
   vpc_subnetwork_name = "subnet-${var.deployment_id}-hub"
   persistent_tags = local.persistent_tags
+  infrastructure_admin_ssh_public_key_filepath = var.infrastructure_admin_ssh_public_key_filepath
+  infrastructure_admin_ssh_private_key_filepath = var.infrastructure_admin_ssh_private_key_filepath
+  infrastructure_admin_username = var.infrastructure_admin_username
 }
 
 module "execution" {
@@ -92,13 +98,16 @@ module "execution" {
   source = "./modules/vm"
 
   count = var.infrastructure_execution_count
-  app_tag = "execution-${count.index + 1}-"
+  app_tag = "execution"
   deployment_id = var.deployment_id
-  machine_type = var.machine_type
+  machine_type = var.infrastructure_execution_machine_type
   zone = var.zone
   vpc_network_id = module.vnet.network_id
   vpc_subnetwork_name = "subnet-${var.deployment_id}-execution"
   persistent_tags = local.persistent_tags
+  infrastructure_admin_ssh_public_key_filepath = var.infrastructure_admin_ssh_public_key_filepath
+  infrastructure_admin_ssh_private_key_filepath = var.infrastructure_admin_ssh_private_key_filepath
+  infrastructure_admin_username = var.infrastructure_admin_username
 }
 
 module "eda" {
@@ -106,11 +115,14 @@ module "eda" {
   source = "./modules/vm"
 
   count = var.infrastructure_eda_count
-  app_tag = "eda-${count.index + 1}-"
+  app_tag = "eda"
   deployment_id = var.deployment_id
-  machine_type = var.machine_type
+  machine_type = var.infrastructure_eda_machine_type
   zone = var.zone
   vpc_network_id = module.vnet.network_id
   vpc_subnetwork_name = "subnet-${var.deployment_id}-eda"
   persistent_tags = local.persistent_tags
+  infrastructure_admin_ssh_public_key_filepath = var.infrastructure_admin_ssh_public_key_filepath
+  infrastructure_admin_ssh_private_key_filepath = var.infrastructure_admin_ssh_private_key_filepath
+  infrastructure_admin_username = var.infrastructure_admin_username
 }

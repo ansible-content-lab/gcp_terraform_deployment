@@ -15,7 +15,6 @@ variable "app_tag" {
 variable "machine_type" {
   description = "Machine type to use for VM creation."
   type = string
-  default = "n2-standard-2"
 }
 
 variable "zone" {
@@ -37,4 +36,20 @@ variable "vpc_subnetwork_name" {
 variable persistent_tags {
   description = "Persistent tags"
   type = map(string)
+}
+
+variable "infrastructure_admin_ssh_public_key_filepath" {
+  description = "Public ssh key file path."
+  type = string
+}
+
+variable "infrastructure_admin_ssh_private_key_filepath" {
+  description = "Private ssh key file path."
+  type = string
+}
+
+variable "infrastructure_admin_username" {
+  type = string
+  description = "The admin username of the VM that will be deployed."
+  nullable = false
 }
