@@ -15,7 +15,6 @@ variable "app_tag" {
 variable "machine_type" {
   description = "Machine type to use for VM creation."
   type = string
-  default = "n2-standard-2"
 }
 
 variable "zone" {

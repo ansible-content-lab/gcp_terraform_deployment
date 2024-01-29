@@ -45,6 +45,24 @@ The variables below are required for running this template
 | `infrastructure_db_username` | Username that will be the admin of the new database server. |
 | `infrastructure_db_password` | Password of the admin of the new database server. |
 
+The variables below are optional for running this template
+
+| Variable | Description |
+| -------- | ----------- |
+| `deployment_id` | This is a random string that will be used in tagging for correlating the resources used with a deployment of AAP. It is lower case alpha chars between 2-10 char length. If not provided, template will generate the deployment_id. |
+| `infrastructure_controller_count` | The number of instances for controller. |
+| `infrastructure_controller_machine_type` | The SKU which should be used for controller Virtual Machine. |
+| `infrastructure_eda_count` | The number of instances for Event-Driven Ansible. |
+| `infrastructure_eda_machine_type` | The SKU which should be used for Event-Driven Ansible Virtual Machine. |
+| `infrastructure_execution_count` | The number of instances for execution. |
+| `infrastructure_execution_machine_type` | The SKU which should be used for execution Virtual Machine. |
+| `infrastructure_hub_count` | The number of instances for hub. |
+| `infrastructure_hub_machine_type` | The SKU which should be used for hub Virtual Machine. |
+| `infrastructure_admin_ssh_public_key_filepath` | SSH public key path. |
+| `infrastructure_admin_ssh_private_key_filepath` | SSH private key path. |
+
+Additional variables can be found in variables.tf, modules/database/variables.tf, modules/vm/variables.tf, modules/vpc/variables.tf
+
 Assuming that all variables are configured properly and your GCP account has permission to deploy the resources defined in this template.
 
 Initialize Terraform
@@ -70,6 +88,14 @@ Apply infrastructure
 terraform apply
 ```
 Confirm to create infrastructure or pass in the `-auto-approve` parameter.
+
+### Installing Red Hat Ansible Automation Platform
+
+At this point you can ssh into one of the controller nodes and run the installer. The example below assumes the default variables.tf values for `infrastructure_admin_username` and `infrastructure_admin_ssh_private_key_filepath`. 
+
+```bash
+ssh -i ~/.ssh/id_rsa awx@<controller-public-ip> 
+```
 
 ## Uninstall
 
