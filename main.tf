@@ -64,7 +64,7 @@ module "controller" {
   source = "./modules/vm"
 
   count = var.infrastructure_controller_count
-  app_tag = "controller-${count.index + 1}-"
+  app_tag = "controller"
   deployment_id = var.deployment_id
   machine_type = var.machine_type
   zone = var.zone
@@ -81,7 +81,7 @@ module "hub" {
   source = "./modules/vm"
 
   count = var.infrastructure_hub_count
-  app_tag = "hub-${count.index + 1}-"
+  app_tag = "hub"
   deployment_id = var.deployment_id
   machine_type = var.machine_type
   zone = var.zone
@@ -98,7 +98,7 @@ module "execution" {
   source = "./modules/vm"
 
   count = var.infrastructure_execution_count
-  app_tag = "execution-${count.index + 1}-"
+  app_tag = "execution"
   deployment_id = var.deployment_id
   machine_type = var.machine_type
   zone = var.zone
@@ -115,7 +115,7 @@ module "eda" {
   source = "./modules/vm"
 
   count = var.infrastructure_eda_count
-  app_tag = "eda-${count.index + 1}-"
+  app_tag = "eda"
   deployment_id = var.deployment_id
   machine_type = var.machine_type
   zone = var.zone
