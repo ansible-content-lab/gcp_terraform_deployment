@@ -108,7 +108,7 @@ variable "aap_admin_password" {
 
 variable "infrastructure_aap_installer_inventory_path" {
   description = "Inventory path on the installer host"
-  default = "/home/awx/inventory_gcp.txt"
+  default = "/home/awx/inventory_gcp"
   type = string
 }
 
