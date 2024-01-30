@@ -89,6 +89,28 @@ variable "user" {
   type    = string
   default = "admin"
 }
+variable "aap_red_hat_username" {
+  description = "Red Hat account name that will be used for Subscription Management."
+  type = string
+}
+
+variable "aap_red_hat_password" {
+  description = "Red Hat account password."
+  type = string
+  sensitive = true
+}
+
+variable "aap_admin_password" {
+  description = "The admin password to create for Ansible Automation Platform application."
+  type = string
+  sensitive = true
+}
+
+variable "infrastructure_aap_installer_inventory_path" {
+  description = "Inventory path on the installer host"
+  default = "/home/awx/inventory_gcp"
+  type = string
+}
 
 variable "infrastructure_admin_ssh_public_key_filepath" {
   description = "Public ssh key file path."

@@ -8,3 +8,8 @@ output "private_ip_address" {
   description = "The first private (PRIVATE) IPv4 address assigned for the master instance"
   value = google_sql_database_instance.aap_infrastructure_db_instance.private_ip_address
 }
+
+output "infrastructure_controller_name" {
+  description = "The first private (PRIVATE) IPv4 address assigned for the master instance"
+  value = google_sql_database_instance.aap_infrastructure_db_instance.connection_name
+}
