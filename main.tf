@@ -147,7 +147,7 @@ for_each = { for host, instance in flatten(module.controller[*].vm_public_ip): h
         infrastructure_db_password = var.infrastructure_db_password
         aap_red_hat_username = var.aap_red_hat_username
         aap_red_hat_password= var.aap_red_hat_password
-        aap_db_host = module.database.infrastructure_controller_ql_connection_name
+        aap_db_host = module.database.infrastructure_controller_name
         aap_admin_password = var.aap_admin_password
         infrastructure_admin_username = var.infrastructure_admin_username
       })
