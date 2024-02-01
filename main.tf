@@ -145,7 +145,7 @@ for_each = { for host, instance in flatten(module.controller[*].vm_public_ip): h
       host = each.value
       private_key = file(var.infrastructure_admin_ssh_private_key_filepath)
     }
-     content = templatefile("${path.module}/templates/inventory.j2", { 
+     content = templatefile("${path.module}/templates/inventory.j2", {
         aap_controller_hosts = module.controller[*].vm_private_ip
         aap_ee_hosts = module.execution[*].vm_private_ip
         aap_hub_hosts = module.hub[*].vm_private_ip
@@ -156,9 +156,21 @@ for_each = { for host, instance in flatten(module.controller[*].vm_public_ip): h
         aap_red_hat_username = var.aap_red_hat_username
         aap_red_hat_password= var.aap_red_hat_password
         aap_db_host = module.database.infrastructure_controller_name
+        aap_db_private_ip = module.database.private_ip_address
         aap_admin_password = var.aap_admin_password
         infrastructure_admin_username = var.infrastructure_admin_username
       })
       destination = var.infrastructure_aap_installer_inventory_path
+  }
+  provisioner "remote-exec" {
+    connection {
+      type = "ssh"
+      user = var.infrastructure_admin_username
+      host = each.value
+      private_key = file(var.infrastructure_admin_ssh_private_key_filepath)
+    }
+      inline = [
+        "sudo cp ${var.infrastructure_aap_installer_inventory_path} /opt/ansible-automation-platform/installer/inventory_gcp"
+      ]
   }
 }

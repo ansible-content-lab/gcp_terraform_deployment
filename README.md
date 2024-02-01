@@ -94,7 +94,7 @@ Confirm to create infrastructure or pass in the `-auto-approve` parameter.
 At this point you can ssh into one of the controller nodes and run the installer. The example below assumes the default variables.tf values for `infrastructure_admin_username` and `infrastructure_admin_ssh_private_key_filepath`. 
 
 ```bash
-ssh -i ~/.ssh/id_rsa awx@<controller-public-ip> 
+ssh -i ~/.ssh/id_rsa gcp-user@<controller-public-ip> 
 ```
 
 ## Uninstall
