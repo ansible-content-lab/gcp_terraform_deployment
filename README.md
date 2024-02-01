@@ -97,6 +97,29 @@ At this point you can ssh into one of the controller nodes and run the installer
 ssh -i ~/.ssh/id_rsa gcp-user@<controller-public-ip> 
 ```
 
+We provided a sample inventory that could be used to deploy AAP.
+You might need to edit the inventory to fit your needs.
+
+Before you start the installation, you need to attach Ansible Automation Platform to the system where you're running the installer. 
+
+Find the pool id for Ansible Automation Platform subscription using command 
+```bash
+sudo subscription-manager list --all --available
+```
+
+Attach subscription to all the VMs 
+```bash
+sudo subscription-manager attach --pool=<pool-id>
+```
+
+Run the installer to deploy Ansible Automation Platform
+```bash
+$ cd /opt/ansible-automation-platform/installer/
+$ sudo ./setup.sh -i inventory_gcp
+```
+
+For more information, read the install guide from https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/
+
 ## Uninstall
 
 This will permanently remove all data and infrastructure from the Google cloud, so only run this if you are sure that you want to delete all traces of the deployment.

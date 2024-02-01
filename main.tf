@@ -162,6 +162,24 @@ for_each = { for host, instance in flatten(module.controller[*].vm_public_ip): h
       })
       destination = var.infrastructure_aap_installer_inventory_path
   }
+
+  provisioner "file" {
+    connection {
+      type = "ssh"
+      user = var.infrastructure_admin_username
+      host = each.value
+      private_key = file(var.infrastructure_admin_ssh_private_key_filepath)
+    }
+    content = templatefile("${path.module}/templates/config.j2", {
+        aap_controller_hosts = module.controller[*].vm_private_ip
+        aap_ee_hosts = module.execution[*].vm_private_ip
+        aap_hub_hosts = module.hub[*].vm_private_ip
+        aap_eda_hosts = module.eda[*].vm_private_ip
+        infrastructure_admin_username = var.infrastructure_admin_username
+    })
+    destination = "/home/${var.infrastructure_admin_username}/.ssh/config"
+  }
+
   provisioner "remote-exec" {
     connection {
       type = "ssh"
