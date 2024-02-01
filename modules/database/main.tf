@@ -48,6 +48,12 @@ resource "google_sql_database_instance" "aap_infrastructure_db_instance" {
       ipv4_enabled = var.ipv4_enabled
       private_network = var.vpc_network_id
     }
+
+    database_flags {
+      name = "max_connections"
+      value = "100"
+    }
+
     user_labels = var.persistent_tags
   }
 }
