@@ -190,10 +190,7 @@ for_each = { for host, instance in flatten(module.controller[*].vm_public_ip): h
       inline = [
         "chmod 0644 /home/${var.infrastructure_admin_username}/.ssh/config",
         "sudo cp /home/${var.infrastructure_admin_username}/.ssh/config /root/.ssh/config",
-        "sudo cp ${var.infrastructure_aap_installer_inventory_path} /opt/ansible-automation-platform/installer/inventory_gcp",
-        "sudo automation-controller-service stop",
-        "sudo systemctl stop receptor",
-        "sudo usermod awx -d /var/lib/awx -s /bin/bash"
+        "sudo cp ${var.infrastructure_aap_installer_inventory_path} /opt/ansible-automation-platform/installer/inventory_gcp"
       ]
   }
 }
