@@ -49,6 +49,9 @@ The variables below are optional for running this template
 
 | Variable | Description |
 | -------- | ----------- |
+| `aap_admin_password` | The admin password to create for Ansible Automation Platform application. |
+| `aap_red_hat_password` | The Red Hat account password. |
+| `aap_red_hat_username` | This is your Red Hat account name that will be used for Subscription Management (https://access.redhat.com/management). |
 | `deployment_id` | This is a random string that will be used in tagging for correlating the resources used with a deployment of AAP. It is lower case alpha chars between 2-10 char length. If not provided, template will generate the deployment_id. |
 | `infrastructure_controller_count` | The number of instances for controller. |
 | `infrastructure_controller_machine_type` | The SKU which should be used for controller Virtual Machine. |
@@ -91,11 +94,34 @@ Confirm to create infrastructure or pass in the `-auto-approve` parameter.
 
 ### Installing Red Hat Ansible Automation Platform
 
-At this point you can ssh into one of the controller nodes and run the installer. The example below assumes the default variables.tf values for `infrastructure_admin_username` and `infrastructure_admin_ssh_private_key_filepath`. 
+At this point you can ssh into one of the controller nodes and run the installer. The example below assumes the default variables.tf values for `infrastructure_admin_username` and `infrastructure_admin_ssh_private_key_filepath`.
 
 ```bash
-ssh -i ~/.ssh/id_rsa awx@<controller-public-ip> 
+ssh -i ~/.ssh/id_rsa gcp-user@<controller-public-ip>
 ```
+
+We provided a sample inventory that could be used to deploy AAP.
+You might need to edit the inventory to fit your needs.
+
+Before you start the installation, you need to attach Ansible Automation Platform to the system where you're running the installer. 
+
+Find the pool id for Ansible Automation Platform subscription using command
+```bash
+sudo subscription-manager list --all --available
+```
+
+Attach subscription to all the VMs
+```bash
+sudo subscription-manager attach --pool=<pool-id>
+```
+
+Run the installer to deploy Ansible Automation Platform
+```bash
+$ cd /opt/ansible-automation-platform/installer/
+$ sudo ./setup.sh -i inventory_gcp
+```
+
+For more information, read the install guide from https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/
 
 ## Uninstall
 
@@ -104,7 +130,7 @@ This will permanently remove all data and infrastructure from the Google cloud, 
 ```bash
 terraform destroy
 ```
-Confirm to destroy infrastructure or pass in the `-auto-approve` parameter. 
+Confirm to destroy infrastructure or pass in the `-auto-approve` parameter.
 
 *Note*: If terraform destroy gets stuck on deleting the network connection, you can manually delete the network connection in the GCP console then run `terraform destroy` again
 

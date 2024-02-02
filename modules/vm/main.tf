@@ -63,3 +63,24 @@ resource "terraform_data" "aap_infrastructure_sshkey" {
     ]
   }
 }
+
+resource "terraform_data" "aap_subscription_manager" {
+  depends_on = [ google_compute_instance.aap_infrastructure_vm ]
+
+  triggers_replace = [
+    google_compute_instance.aap_infrastructure_vm.id
+  ]
+  connection {
+    type = "ssh"
+    user = var.infrastructure_admin_username
+    host = google_compute_instance.aap_infrastructure_vm.network_interface[0].access_config[0].nat_ip
+    private_key = file(var.infrastructure_admin_ssh_private_key_filepath)
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "sudo subscription-manager register --username ${var.aap_red_hat_username} --password ${var.aap_red_hat_password} --auto-attach",
+      "sudo subscription-manager config --rhsm.manage_repos=1",
+      "yes | sudo dnf upgrade"
+      ]
+  }
+}

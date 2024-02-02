@@ -108,7 +108,7 @@ variable "aap_admin_password" {
 
 variable "infrastructure_aap_installer_inventory_path" {
   description = "Inventory path on the installer host"
-  default = "/home/awx/inventory_gcp"
+  default = "/home/gcp-user/inventory_gcp"
   type = string
 }
 
@@ -126,7 +126,7 @@ variable "infrastructure_admin_ssh_private_key_filepath" {
 
 variable "infrastructure_admin_username" {
   type = string
-  default = "awx"
+  default = "gcp-user"
   description = "The admin username of the VM that will be deployed."
   nullable = false
 }
