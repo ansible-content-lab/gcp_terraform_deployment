@@ -27,7 +27,7 @@ resource "google_compute_instance" "aap_infrastructure_vm" {
   tags = [ "aap-infrastructure-${var.deployment_id}" ]
   boot_disk {
     initialize_params {
-      image = "aap-installer-1704995744-x86-64"
+      image = var.machine_image
     }
   }
   network_interface {

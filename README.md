@@ -14,7 +14,13 @@ This template performs the following actions in the order listed.
 | Create a firewall rules | Creates a firewall roules group that allows AAP ports within the VPC and HTTPS and automation mesh ports externally. |
 | Create a database server | Creates a PostgreSQL database instance and the necessary databases inside of it for the controller, hub, and Event-Driven Ansible components. |
 | Create a vpc peering | Creates a vpc peering between vpc network and a google's vpc network where SQL instance resides. |
-
+| Create the controller VMs | Creates VMs for controller with the public IP attached. |
+| Create the execution nodes VMs | Creates VMs for execution nodes (if enabled) with the public IP attached. |
+| Create the hub VMs | Creates VMs for private automation hub with the public IP attached. |
+| Create the Event-Driven Ansible VMs | Creates VMs for Event-Driven Ansible (if enabled) with the public IP attached. |
+| Register the VMs with Red Hat | Uses RHEL subscription manager to register each virtual machine for required RPM repos. |
+| Update the VMs | Updates each VM deployed with latest kernel and packages. |
+| Setup one controller VM as the installer | Configures the installer VMs with a private SSH key so that it can communicate with the other VMs that are part of the installation process and configures the installer inventory file based on the VMs that were created as part of this process. |
 ## Getting Started
 
 This section will walk through deploying the GCP infrastructure and Ansible Automation Platform.
@@ -44,14 +50,14 @@ The variables below are required for running this template
 | -------- | ----------- |
 | `infrastructure_db_username` | Username that will be the admin of the new database server. |
 | `infrastructure_db_password` | Password of the admin of the new database server. |
+| `aap_admin_password` | The admin password to create for Ansible Automation Platform application. |
+| `aap_red_hat_password` | The Red Hat account password. |
+| `aap_red_hat_username` | This is your Red Hat account name that will be used for Subscription Management (https://access.redhat.com/management). |
 
 The variables below are optional for running this template
 
 | Variable | Description |
 | -------- | ----------- |
-| `aap_admin_password` | The admin password to create for Ansible Automation Platform application. |
-| `aap_red_hat_password` | The Red Hat account password. |
-| `aap_red_hat_username` | This is your Red Hat account name that will be used for Subscription Management (https://access.redhat.com/management). |
 | `deployment_id` | This is a random string that will be used in tagging for correlating the resources used with a deployment of AAP. It is lower case alpha chars between 2-10 char length. If not provided, template will generate the deployment_id. |
 | `infrastructure_controller_count` | The number of instances for controller. |
 | `infrastructure_controller_machine_type` | The SKU which should be used for controller Virtual Machine. |
